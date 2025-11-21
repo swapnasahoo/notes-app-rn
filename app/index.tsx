@@ -47,7 +47,7 @@ export default function Index() {
               data={notes}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
-                <View className="bg-[#FD99FF] w-full p-4 rounded-md">
+                <View className="bg-[#FD99FF] w-full p-4 rounded-md mb-5">
                   <Text className="text-[#111] text-3xl font-semibold">
                     {item.title}
                   </Text>
@@ -56,6 +56,7 @@ export default function Index() {
                   </Text>
                 </View>
               )}
+              showsVerticalScrollIndicator={false}
             />
           </View>
         )}
