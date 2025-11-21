@@ -4,10 +4,19 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router } from "expo-router";
 import { useContext } from "react";
 import { FlatList, Image, Pressable, Text, View } from "react-native";
+import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
-  const { note } = useContext(NoteContext);
+  const { note, deleteNote } = useContext(NoteContext);
+
+  function rightSwipeDelete() {
+    return (
+      <View className="bg-red-600 p-4 h-26 w-50 justify-center items-center rounded-md">
+        <Text className="text-white font-semibold text-2xl">Delete</Text>
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-[#252525] px-7 py-14">
@@ -41,14 +50,19 @@ export default function Index() {
               data={note}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
-                <View className="bg-[#FD99FF] w-full p-4 rounded-md mb-5">
-                  <Text className="text-[#111] text-3xl font-semibold">
-                    {item.title}
-                  </Text>
-                  <Text className="text-[#111] text-xl pt-1">
-                    {item.content}
-                  </Text>
-                </View>
+                <Swipeable
+                  renderLeftActions={() => rightSwipeDelete()}
+                  onSwipeableOpen={() => deleteNote(item.id)}
+                >
+                  <View className="bg-[#FD99FF] w-full p-4 rounded-md mb-5">
+                    <Text className="text-[#111] text-3xl font-semibold">
+                      {item.title}
+                    </Text>
+                    <Text className="text-[#111] text-xl pt-1">
+                      {item.content}
+                    </Text>
+                  </View>
+                </Swipeable>
               )}
               showsVerticalScrollIndicator={false}
             />

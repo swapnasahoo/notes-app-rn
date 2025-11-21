@@ -9,11 +9,13 @@ interface Note {
 interface NoteContextType {
   note: Note[];
   addNote: (title: string, content: string) => void;
+  deleteNote: (id: number) => void;
 }
 
 export const NoteContext = createContext<NoteContextType>({
   note: [],
   addNote: () => {},
+  deleteNote: () => {},
 });
 
 function NoteContextProvider({ children }: { children: React.ReactNode }) {
@@ -30,7 +32,13 @@ function NoteContextProvider({ children }: { children: React.ReactNode }) {
     ]);
   }
 
-  return <NoteContext value={{ note, addNote }}>{children}</NoteContext>;
+  function deleteNote(id: number) {
+    setNote(note.filter((n) => n.id !== id));
+  }
+
+  return (
+    <NoteContext value={{ note, addNote, deleteNote }}>{children}</NoteContext>
+  );
 }
 
 export default NoteContextProvider;
