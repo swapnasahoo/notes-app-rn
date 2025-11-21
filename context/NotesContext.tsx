@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createContext, useEffect, useState } from "react";
 
 interface Note {
   id: number;
@@ -35,6 +36,24 @@ function NoteContextProvider({ children }: { children: React.ReactNode }) {
   function deleteNote(id: number) {
     setNote(note.filter((n) => n.id !== id));
   }
+
+  useEffect(() => {
+    async function loadNotes() {
+      const savedNotes = await AsyncStorage.getItem("notes");
+
+      if (savedNotes) {
+        setNote(JSON.parse(savedNotes));
+      } else {
+        setNote([]);
+      }
+    }
+
+    loadNotes();
+  }, []);
+
+  useEffect(() => {
+    AsyncStorage.setItem("notes", JSON.stringify(note));
+  }, [note]);
 
   return (
     <NoteContext value={{ note, addNote, deleteNote }}>{children}</NoteContext>
