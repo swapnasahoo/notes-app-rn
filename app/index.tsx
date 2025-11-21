@@ -1,5 +1,6 @@
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { router } from "expo-router";
 import { useState } from "react";
 import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -61,9 +62,12 @@ export default function Index() {
           </View>
         )}
       </SafeAreaView>
-      <View className="bg-blue-500 justify-center items-center size-18 sm:size-20 elevation-2xl shadow-2xl p-2 rounded-full absolute bottom-[10%] right-[10%]">
+      <Pressable
+        className="bg-blue-500 justify-center items-center size-18 sm:size-20 elevation-2xl shadow-2xl p-2 rounded-full absolute bottom-[10%] right-[10%]"
+        onPress={() => router.push("/NewNote")}
+      >
         <FontAwesome6 name="plus" size={36} color="white" />
-      </View>
+      </Pressable>
     </View>
   );
 }
