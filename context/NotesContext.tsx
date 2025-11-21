@@ -26,7 +26,7 @@ function NoteContextProvider({ children }: { children: React.ReactNode }) {
     setNote((n) => [
       ...n,
       {
-        id: n.length,
+        id: Date.now(),
         title: title,
         content: content,
       },
