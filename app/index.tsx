@@ -1,20 +1,13 @@
+import { NoteContext } from "@/context/NotesContext";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router } from "expo-router";
-import { useState } from "react";
+import { useContext } from "react";
 import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
-  const [notes, setNotes] = useState<
-    { id: number; title: string; content: string }[]
-  >([
-    {
-      id: 0,
-      title: "Note App",
-      content: "This is a simple app.",
-    },
-  ]);
+  const { note } = useContext(NoteContext);
 
   return (
     <View className="flex-1 bg-[#252525] px-7 py-14">
@@ -31,7 +24,7 @@ export default function Index() {
           </Pressable>
         </View>
 
-        {notes.length === 0 ? (
+        {note.length === 0 ? (
           <View className="flex-1 items-center relative">
             <Image
               source={require("../assets/images/home-screen-empty.png")}
@@ -45,7 +38,7 @@ export default function Index() {
         ) : (
           <View className="mt-8">
             <FlatList
-              data={notes}
+              data={note}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
                 <View className="bg-[#FD99FF] w-full p-4 rounded-md mb-5">

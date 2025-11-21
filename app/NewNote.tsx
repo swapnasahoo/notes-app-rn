@@ -1,13 +1,16 @@
+import { NoteContext } from "@/context/NotesContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router } from "expo-router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Pressable, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const NewNote = () => {
   const [titleValue, setTitleValue] = useState("");
   const [contentValue, setContentValue] = useState("");
+
+  const { addNote } = useContext(NoteContext);
 
   return (
     <View className="bg-[#252525] flex-1 py-12 px-8">
@@ -22,9 +25,15 @@ const NewNote = () => {
           <View className="bg-[#3B3B3B] p-3.5 rounded-2xl mr-6 sm:mr-8">
             <MaterialIcons name="visibility" size={24} color="white" />
           </View>
-          <View className="bg-[#3B3B3B] p-3.5 rounded-2xl">
+          <Pressable
+            className="bg-[#3B3B3B] p-3.5 rounded-2xl"
+            onPress={() => {
+              addNote(titleValue, contentValue);
+              router.push("/");
+            }}
+          >
             <Ionicons name="save-outline" size={24} color="white" />
-          </View>
+          </Pressable>
         </View>
 
         <View className="mt-10">
