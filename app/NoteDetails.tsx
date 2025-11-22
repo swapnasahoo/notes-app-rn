@@ -1,11 +1,25 @@
+import { NoteContext } from "@/context/NotesContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { router } from "expo-router";
-import { useState } from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import { useContext, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const NewNote = () => {
   const [opened, setOpened] = useState(false);
+
+  const { id } = useLocalSearchParams();
+  const { note, deleteNote } = useContext(NoteContext);
+
+  const noteFound = note.find((n) => n.id === Number(id));
+
+  // HANDLING TypeScipt undefined WARNING
+  if (!noteFound) {
+    return;
+  }
+
+  const [newTitle, setNewTitle] = useState(noteFound.title);
+  const [newContent, setNewContent] = useState(noteFound.content);
 
   return (
     <View className="bg-[#252525] flex-1 py-12 px-8">
@@ -35,6 +49,7 @@ const NewNote = () => {
           <TextInput
             placeholder="Title"
             className="text-5xl text-white caret-blue-500 placeholder:text-[#9A9A9A]"
+            value={newTitle}
           ></TextInput>
 
           {/* CONTENT */}
@@ -44,6 +59,7 @@ const NewNote = () => {
             numberOfLines={18}
             className="text-2xl text-white caret-blue-500 placeholder:text-[#9A9A9A] 
             mt-1 sm:mt-4 min-h-10"
+            value={newContent}
           ></TextInput>
         </View>
       </SafeAreaView>

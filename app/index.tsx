@@ -56,7 +56,12 @@ export default function Index() {
                 >
                   <Pressable
                     className="bg-[#FD99FF] w-full p-4 rounded-md mb-5"
-                    onPress={() => router.push("/NoteDetails")}
+                    onPress={() =>
+                      router.push({
+                        pathname: "/NoteDetails",
+                        params: { id: item.id },
+                      })
+                    }
                   >
                     <Text className="text-[#111] text-3xl font-semibold">
                       {item.title}
