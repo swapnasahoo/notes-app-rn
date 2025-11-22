@@ -1,6 +1,5 @@
 import { NoteContext } from "@/context/NotesContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router } from "expo-router";
 import { useContext, useState } from "react";
 import { Pressable, TextInput, View } from "react-native";
@@ -22,9 +21,7 @@ const NewNote = () => {
           >
             <Ionicons name="chevron-back" size={24} color="white" />
           </Pressable>
-          <View className="bg-[#3B3B3B] p-3.5 rounded-2xl mr-6 sm:mr-8">
-            <MaterialIcons name="visibility" size={24} color="white" />
-          </View>
+
           <Pressable
             className="bg-[#3B3B3B] p-3.5 rounded-2xl"
             onPress={() => {
