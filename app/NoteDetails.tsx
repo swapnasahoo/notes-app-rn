@@ -68,7 +68,15 @@ const NewNote = () => {
         className={`absolute top-[20%] sm:top-[16%] right-8  w-44 py-2 rounded-xl bg-[#3B3B3B] shadow-lg elevation-lg transition-all ease-in-out
   ${opened ? "opacity-100" : "opacity-0"}`}
       >
-        <Text className="text-white px-4 py-2">Delete</Text>
+        <Pressable
+          className="px-4 py-2"
+          onPress={() => {
+            deleteNote(Number(id));
+            router.push("/");
+          }}
+        >
+          <Text className="text-white">Delete</Text>
+        </Pressable>
       </View>
     </View>
   );
