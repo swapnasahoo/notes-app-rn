@@ -2,14 +2,22 @@ import { NoteContext } from "@/context/NotesContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
 import { useContext, useState } from "react";
-import { Pressable, TextInput, View } from "react-native";
+import { Pressable, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const NewNote = () => {
-  const [titleValue, setTitleValue] = useState("");
-  const [contentValue, setContentValue] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const { addNote } = useContext(NoteContext);
+  const { note } = useContext(NoteContext);
+
+  const filteredNotes =
+    searchQuery.trim() === ""
+      ? note
+      : note.filter(
+          (n) =>
+            n.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            n.content.toLowerCase().includes(searchQuery.toLowerCase())
+        );
 
   return (
     <View className="bg-[#252525] flex-1 py-12 px-8">
@@ -26,7 +34,21 @@ const NewNote = () => {
             placeholder="Search what you need..."
             className="placeholder:text-[#9A9A9A] text-white text-2xl border-2 border-gray-400 
             p-2 w-[80%] rounded-md"
+            onChangeText={setSearchQuery}
           ></TextInput>
+        </View>
+
+        <View className="mt-8">
+          {filteredNotes.map((n) => {
+            return (
+              <View className="bg-[#FD99FF] w-full p-4 rounded-md mb-5">
+                <Text className="text-[#111] text-3xl font-semibold">
+                  {n.title}
+                </Text>
+                <Text className="text-[#111] text-xl pt-1">{n.content}</Text>
+              </View>
+            );
+          })}
         </View>
       </SafeAreaView>
     </View>
