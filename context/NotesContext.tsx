@@ -11,12 +11,14 @@ interface NoteContextType {
   note: Note[];
   addNote: (title: string, content: string) => void;
   deleteNote: (id: number) => void;
+  updateNote: (id: number, title: string, content: string) => void;
 }
 
 export const NoteContext = createContext<NoteContextType>({
   note: [],
   addNote: () => {},
   deleteNote: () => {},
+  updateNote: () => {},
 });
 
 function NoteContextProvider({ children }: { children: React.ReactNode }) {
@@ -35,6 +37,14 @@ function NoteContextProvider({ children }: { children: React.ReactNode }) {
 
   function deleteNote(id: number) {
     setNote(note.filter((n) => n.id !== id));
+  }
+
+  function updateNote(id: number, title: string, content: string) {
+    setNote(
+      note.map((n) =>
+        n.id === id ? { ...n, title: title, content: content } : n
+      )
+    );
   }
 
   useEffect(() => {
@@ -56,7 +66,9 @@ function NoteContextProvider({ children }: { children: React.ReactNode }) {
   }, [note]);
 
   return (
-    <NoteContext value={{ note, addNote, deleteNote }}>{children}</NoteContext>
+    <NoteContext value={{ note, addNote, deleteNote, updateNote }}>
+      {children}
+    </NoteContext>
   );
 }
 

@@ -9,7 +9,7 @@ const NewNote = () => {
   const [opened, setOpened] = useState(false);
 
   const { id } = useLocalSearchParams();
-  const { note, deleteNote } = useContext(NoteContext);
+  const { note, deleteNote, updateNote } = useContext(NoteContext);
 
   const noteFound = note.find((n) => n.id === Number(id));
 
@@ -39,7 +39,13 @@ const NewNote = () => {
             <Ionicons name="ellipsis-vertical" size={24} color="white" />
           </Pressable>
 
-          <Pressable className="bg-[#3B3B3B] p-3.5 rounded-2xl">
+          <Pressable
+            className="bg-[#3B3B3B] p-3.5 rounded-2xl"
+            onPress={() => {
+              updateNote(Number(id), newTitle, newContent);
+              router.push("/");
+            }}
+          >
             <Ionicons name="save-outline" size={24} color="white" />
           </Pressable>
         </View>
@@ -50,6 +56,7 @@ const NewNote = () => {
             placeholder="Title"
             className="text-5xl text-white caret-blue-500 placeholder:text-[#9A9A9A]"
             value={newTitle}
+            onChangeText={setNewTitle}
           ></TextInput>
 
           {/* CONTENT */}
@@ -60,6 +67,7 @@ const NewNote = () => {
             className="text-2xl text-white caret-blue-500 placeholder:text-[#9A9A9A] 
             mt-1 sm:mt-4 min-h-10"
             value={newContent}
+            onChangeText={setNewContent}
           ></TextInput>
         </View>
       </SafeAreaView>
