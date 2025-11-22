@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const NewNote = () => {
+const NoteDetails = () => {
   const [opened, setOpened] = useState(false);
 
   const { id } = useLocalSearchParams();
@@ -90,4 +90,4 @@ const NewNote = () => {
   );
 };
 
-export default NewNote;
+export default NoteDetails;
