@@ -18,6 +18,10 @@ export default function RootLayout() {
           />
           <Stack.Screen
             name="NoteDetails"
+            options={{ animation: "slide_from_bottom" }}
+          />
+          <Stack.Screen
+            name="SearchNote"
             options={{ animation: "slide_from_right" }}
           />
         </Stack>

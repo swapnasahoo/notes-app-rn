@@ -25,7 +25,10 @@ export default function Index() {
           <Text className="text-5xl font-semibold text-white mr-auto">
             Notes
           </Text>
-          <Pressable className="bg-[#3B3B3B] p-3.5 rounded-2xl ml-5">
+          <Pressable
+            className="bg-[#3B3B3B] p-3.5 rounded-2xl ml-5"
+            onPress={() => router.push("/SearchNote")}
+          >
             <MaterialIcons name="search" size={24} color="white" />
           </Pressable>
           <Pressable className="bg-[#3B3B3B] p-3.5 rounded-2xl ml-5">
