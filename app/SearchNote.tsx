@@ -39,16 +39,18 @@ const NewNote = () => {
         </View>
 
         <View className="mt-8">
-          {filteredNotes.map((n) => {
-            return (
+          {filteredNotes.length === 0 ? (
+            <Text className="text-white text-5xl font-semibold mt-5">Note not found</Text>
+          ) : (
+            filteredNotes.map((n) => (
               <View className="bg-[#FD99FF] w-full p-4 rounded-md mb-5">
                 <Text className="text-[#111] text-3xl font-semibold">
                   {n.title}
                 </Text>
                 <Text className="text-[#111] text-xl pt-1">{n.content}</Text>
               </View>
-            );
-          })}
+            ))
+          )}
         </View>
       </SafeAreaView>
     </View>
