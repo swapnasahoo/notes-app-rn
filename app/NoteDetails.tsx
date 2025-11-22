@@ -13,13 +13,13 @@ const NewNote = () => {
 
   const noteFound = note.find((n) => n.id === Number(id));
 
+  const [newTitle, setNewTitle] = useState(noteFound?.title ?? "");
+  const [newContent, setNewContent] = useState(noteFound?.content ?? "");
+
   // HANDLING TypeScipt undefined WARNING
   if (!noteFound) {
-    return;
+    return null;
   }
-
-  const [newTitle, setNewTitle] = useState(noteFound.title);
-  const [newContent, setNewContent] = useState(noteFound.content);
 
   return (
     <View className="bg-[#252525] flex-1 py-12 px-8">
