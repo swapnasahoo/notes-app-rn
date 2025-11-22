@@ -16,6 +16,10 @@ export default function RootLayout() {
             name="NewNote"
             options={{ animation: "slide_from_right" }}
           />
+          <Stack.Screen
+            name="NoteDetails"
+            options={{ animation: "slide_from_right" }}
+          />
         </Stack>
       </NoteContextProvider>
     </GestureHandlerRootView>

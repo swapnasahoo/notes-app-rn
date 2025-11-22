@@ -54,14 +54,17 @@ export default function Index() {
                   renderLeftActions={() => rightSwipeDelete()}
                   onSwipeableOpen={() => deleteNote(item.id)}
                 >
-                  <View className="bg-[#FD99FF] w-full p-4 rounded-md mb-5">
+                  <Pressable
+                    className="bg-[#FD99FF] w-full p-4 rounded-md mb-5"
+                    onPress={() => router.push("/NoteDetails")}
+                  >
                     <Text className="text-[#111] text-3xl font-semibold">
                       {item.title}
                     </Text>
                     <Text className="text-[#111] text-xl pt-1">
                       {item.content}
                     </Text>
-                  </View>
+                  </Pressable>
                 </Swipeable>
               )}
               showsVerticalScrollIndicator={false}
