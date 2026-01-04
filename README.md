@@ -8,6 +8,12 @@ This is a simple notes app created using React Native + Expo. It allows you to c
 3. Delete notes
 4. Add title and description of note
 
+# Tech Stack
+1. React Native
+2. Expo
+3. Nativewind
+4. TypeScript
+
 # Upcoming features
 
 1. Enhanced UI
